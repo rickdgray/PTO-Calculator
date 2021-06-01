@@ -15,13 +15,11 @@ namespace PtoCalculator
             var PTO_DAYS_EARNED_PER_YEAR = 20.0;
             var PTO_DAYS_NEEDED_FOR_WINTER_HOLIDAYS = 7;
 
-            //var testText = File.ReadAllText(new DirectoryInfo("test.ics").FullName);
-            //var test = Calendar.Load(testText);
-
             var calendar = new Calendar();
 
             //timezones: https://nodatime.org/TimeZones
             calendar.AddTimeZone(new VTimeZone("America/Chicago"));
+            calendar.AddProperty("X-WR-CALNAME", "PTO Accrual");
 
             var days_till_next_full_pto_day_accrual = 365 / (PTO_DAYS_EARNED_PER_YEAR  - PTO_DAYS_NEEDED_FOR_WINTER_HOLIDAYS);
 
@@ -44,7 +42,7 @@ namespace PtoCalculator
                     newEvent.Start = new CalDateTime(currentDate);
                 }
 
-                newEvent.End = new CalDateTime(currentDate.AddDays(1));
+                newEvent.End = new CalDateTime(newEvent.Start.AddDays(1));
                 newEvent.Summary = $"{dayCount}/5 PTO Days Accrued";
 
                 calendar.Events.Add(newEvent);
