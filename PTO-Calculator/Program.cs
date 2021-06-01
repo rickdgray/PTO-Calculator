@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Ical.Net;
 using Ical.Net.CalendarComponents;
 using Ical.Net.DataTypes;
@@ -53,7 +54,7 @@ namespace PtoCalculator
             }
 
             var serializer = new CalendarSerializer();
-            Console.WriteLine(serializer.SerializeToString(calendar));
+            File.WriteAllText("pto.ics", serializer.SerializeToString(calendar));
         }
     }
 }
