@@ -6,4 +6,8 @@
     <RootNamespace>PTO_Calculator</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Ical.Net" Version="4.2.0" />
+  </ItemGroup>
+
 </Project>
