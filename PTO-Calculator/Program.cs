@@ -5,9 +5,8 @@ using Ical.Net.CalendarComponents;
 using Ical.Net.DataTypes;
 using Ical.Net.Serialization;
 
-const int CURRENT_YEAR = 2021;
 const double PTO_DAYS_EARNED_PER_YEAR = 20;
-const double PTO_DAYS_NEEDED_FOR_WINTER_HOLIDAYS = 7;
+const double PTO_DAYS_RESERVED = 7;
 
 var calendar = new Calendar();
 
@@ -15,9 +14,10 @@ var calendar = new Calendar();
 calendar.AddTimeZone(new VTimeZone("America/Chicago"));
 calendar.AddProperty("X-WR-CALNAME", "PTO Accrual");
 
-var days_till_next_full_pto_day_accrual = 365 / (PTO_DAYS_EARNED_PER_YEAR - PTO_DAYS_NEEDED_FOR_WINTER_HOLIDAYS);
+var days_till_next_full_pto_day_accrual = 365 / (PTO_DAYS_EARNED_PER_YEAR - PTO_DAYS_RESERVED);
 
-var currentDate = new DateTime(CURRENT_YEAR, 1, 1).AddDays(days_till_next_full_pto_day_accrual);
+var currentYear = new DateTime().Year;
+var currentDate = new DateTime(currentYear, 1, 1).AddDays(days_till_next_full_pto_day_accrual);
 var endDate = currentDate.AddYears(1);
 
 var dayCount = 1;
@@ -37,7 +37,7 @@ while (currentDate < endDate)
     }
 
     newEvent.End = new CalDateTime(newEvent.Start.AddDays(1));
-    newEvent.Summary = $"{dayCount}/5 PTO Days Accrued";
+    newEvent.Summary = $"{dayCount}/5 weeks PTO Accrued";
 
     calendar.Events.Add(newEvent);
 
