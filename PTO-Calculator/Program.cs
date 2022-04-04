@@ -6,7 +6,7 @@ using Ical.Net.DataTypes;
 using Ical.Net.Serialization;
 
 const double PTO_DAYS_EARNED_PER_YEAR = 20;
-const double PTO_DAYS_RESERVED = 7;
+const double PTO_DAYS_RESERVED = 8;
 
 var calendar = new Calendar();
 
@@ -16,7 +16,7 @@ calendar.AddProperty("X-WR-CALNAME", "PTO Accrual");
 
 var days_till_next_full_pto_day_accrual = 365 / (PTO_DAYS_EARNED_PER_YEAR - PTO_DAYS_RESERVED);
 
-var currentYear = new DateTime().Year;
+var currentYear = DateTime.Now.Year;
 var currentDate = new DateTime(currentYear, 1, 1).AddDays(days_till_next_full_pto_day_accrual);
 var endDate = currentDate.AddYears(1);
 
