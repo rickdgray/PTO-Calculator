@@ -5,8 +5,8 @@ using Ical.Net.CalendarComponents;
 using Ical.Net.DataTypes;
 using Ical.Net.Serialization;
 
-const double PTO_DAYS_EARNED_PER_YEAR = 20;
-const double PTO_DAYS_RESERVED = 8;
+const double PTO_DAYS_EARNED_PER_YEAR = 18;
+const double PTO_DAYS_RESERVED = 6;
 
 var calendar = new Calendar();
 
