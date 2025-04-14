@@ -11,14 +11,16 @@ var daysEarnedPerYearOption = new Option<int>(
 {
     IsRequired = true
 };
+daysEarnedPerYearOption.AddAlias("--earned");
+daysEarnedPerYearOption.AddAlias("-e");
 
 var daysReservedOption = new Option<int>(
     name: "--days-reserved",
-    description: "The number of PTO days reserved for planned vacation."
-)
-{
-    IsRequired = true
-};
+    description: "The number of PTO days reserved for planned vacation.",
+    getDefaultValue: () => 0
+);
+daysReservedOption.AddAlias("--reserved");
+daysReservedOption.AddAlias("-r");
 
 var rootCommand = new RootCommand("PTO Calculator");
 rootCommand.AddOption(daysEarnedPerYearOption);
@@ -64,7 +66,7 @@ rootCommand.SetHandler((daysEarnedPerYear, daysReserved) =>
         }
 
         var serializer = new CalendarSerializer();
-        File.WriteAllText("pto.ics", serializer.SerializeToString(calendar));
+        File.WriteAllText("PTO Accrual.ics", serializer.SerializeToString(calendar));
     },
     daysEarnedPerYearOption,
     daysReservedOption
