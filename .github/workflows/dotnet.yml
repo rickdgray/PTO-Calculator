@@ -20,7 +20,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Publish
-      run: dotnet publish ./calc-pto/calc-pto.csproj -c Release --self-contained true -r win-x64 -o ./publish
+      run: dotnet publish ./calc-pto/calc-pto.csproj -c Release -r win-x64 -o ./publish
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4
       with:
